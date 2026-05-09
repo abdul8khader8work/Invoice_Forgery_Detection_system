@@ -1,0 +1,76 @@
+{
+  "name": "Invoice Forgery Detection",
+  "short_name": "Invoice Scanner",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1976D2",
+  "theme_color": "#1976D2",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "description": "AI-powered invoice forgery detection system",
+  "categories": ["productivity", "business", "finance"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/scan-screen.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "screenshots/mobile-scan.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Scan Invoice",
+      "short_name": "Scan",
+      "description": "Quickly scan a new invoice",
+      "url": "/scan",
+      "icons": [
+        {
+          "src": "icons/scan-shortcut.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "View History",
+      "short_name": "History",
+      "description": "View scanned invoices history",
+      "url": "/history",
+      "icons": [
+        {
+          "src": "icons/history-shortcut.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "windows",
+      "url": "https://apps.microsoft.com/store/detail/invoice-forgery-detection",
+      "id": "com.invoiceforgery.detection"
+    }
+  ],
+  "prefer_related_applications": false
+}

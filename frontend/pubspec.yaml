@@ -1,0 +1,79 @@
+name: invoice_forgery_detection
+description: Production-ready Invoice Forgery Detection System
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  http: ^1.1.0
+  http_parser: ^4.0.2
+  mime: ^1.0.4
+  dio: ^5.4.0
+  file_picker: ^8.0.0
+  image_picker: ^1.0.4
+  permission_handler: ^11.0.1
+  # connectivity_plus: ^5.0.2 # Temporarily disabled due to disk space
+  pdf: ^3.10.7
+  path_provider: ^2.1.1
+  intl: ^0.18.1
+  fl_chart: ^0.69.0
+  # pdf_render: ^1.4.12 # Disabled due to v1 embedding compatibility issues
+  image: ^4.0.17
+  # Phase 2A: API Client Generation
+  openapi_generator_cli: ^6.1.0
+  # Phase 2A: State Management
+  flutter_riverpod: ^2.5.0
+  # Phase 2A: Routing
+  go_router: ^17.2.1
+  # Phase 2A: UI Polish
+  flutter_animate: ^4.5.0
+  # Phase 2A: Feature Flags
+  flutter_dotenv: ^5.1.0
+  # Phase 3B: Windows MSIX packaging
+  msix: ^3.16.0
+  
+  # Offline support
+  shared_preferences: ^2.2.2
+  
+  # Authentication
+  flutter_secure_storage: ^9.0.0
+  jwt_decode: ^0.3.1
+  
+  # Push notifications (disabled due to web compatibility issues)
+  # firebase_messaging: ^14.7.10
+  # flutter_local_notifications: ^16.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  # Phase 2A: Code Generation
+  build_runner: ^2.4.8
+  # Phase 2A: Riverpod Code Generation
+  riverpod_generator: ^2.3.0
+  riverpod_lint: ^2.3.0
+  # Phase 2A: Integration Testing
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/images/
+    - assets/icons/
+
+# Phase 3B: Windows MSIX configuration
+msix_config:
+  display_name: Invoice Forgery Detection
+  publisher_display_name: Invoice Detection Team
+  identity_name: com.invoiceforgery.detection
+  msix_version: 1.0.0.0
+  description: AI-powered invoice forgery detection system
+  publisher: CN=InvoiceDetection
+  capabilities: 'internetClient,webcam'
+  languages: 'en-US'

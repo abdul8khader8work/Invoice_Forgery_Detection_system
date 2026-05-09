@@ -1,0 +1,14 @@
+analyzer:
+  exclude:
+    - lib/legacy/**
+  errors:
+    # Allow deprecated member use warnings (legacy code)
+    deprecated_member_use: ignore
+    # Allow unused elements (legacy code)
+    unused_element: ignore
+    # Allow unused fields (legacy code)
+    unused_field: ignore
+    # Allow unused local variables (legacy code)
+    unused_local_variable: ignore
+    # Allow unused imports (legacy code)
+    unused_import: ignore

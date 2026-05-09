@@ -1,0 +1,23 @@
+# Web build configuration for WASM renderer
+# Target: <2s load on 4G
+
+# Build configuration
+build:
+  web:
+    # Use WASM renderer for better performance
+    renderer: wasm
+    # Enable source maps for debugging
+    source-maps: true
+    # Optimize for production
+    release: true
+    # Tree-shake unused code
+    tree-shake-icons: true
+    # Remove unused code
+    tree-shake-assets: true
+
+# Asset optimization
+assets:
+  # Compress images
+  - images/
+  # Lazy-load fonts
+  - assets/fonts/

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1976D2">
+  <title>Offline - Invoice Scanner</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+    
+    .container {
+      text-align: center;
+      padding: 2rem;
+      max-width: 400px;
+    }
+    
+    .icon {
+      font-size: 64px;
+      margin-bottom: 1rem;
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    p {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+    
+    .cached-data {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cached-data h2 {
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.8;
+    }
+    
+    .scan-count {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    
+    .scan-label {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+    
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    button {
+      background: white;
+      color: #1976D2;
+      border: none;
+      padding: 0.875rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    button.secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    button.secondary:hover {
+      background: white;
+      color: #1976D2;
+    }
+    
+    .spinner {
+      display: none;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .retrying .spinner {
+      display: block;
+    }
+    
+    .retrying button {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">📡</div>
+    <h1>You're Offline</h1>
+    <p>It looks like you've lost your internet connection. Don't worry - your previously scanned invoices are still available.</p>
+    
+    <div class="cached-data">
+      <h2>Cached Scans</h2>
+      <div class="scan-count" id="scanCount">-</div>
+      <div class="scan-label">scans available offline</div>
+    </div>
+    
+    <div class="actions">
+      <div class="spinner"></div>
+      <button onclick="retryConnection()" id="retryBtn">
+        Try Again
+      </button>
+      <button class="secondary" onclick="viewCachedScans()">
+        View Cached Scans
+      </button>
+    </div>
+  </div>
+  
+  <script>
+    // Update cached scan count
+    async function updateCachedCount() {
+      try {
+        const cache = await caches.open('invoice-scanner-api-v1');
+        const requests = await cache.keys();
+        const scanCount = requests.filter(req => req.url.includes('/api/scan')).length;
+        document.getElementById('scanCount').textContent = scanCount;
+      } catch (e) {
+        document.getElementById('scanCount').textContent = '0';
+      }
+    }
+    
+    // Retry connection
+    function retryConnection() {
+      const btn = document.getElementById('retryBtn');
+      btn.parentElement.classList.add('retrying');
+      btn.textContent = 'Checking...';
+      
+      fetch('/', { method: 'HEAD', cache: 'no-store' })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch(() => {
+          btn.parentElement.classList.remove('retrying');
+          btn.textContent = 'Try Again';
+          alert('Still offline. Please check your connection.');
+        });
+    }
+    
+    // View cached scans
+    function viewCachedScans() {
+      // Navigate to history page - it will show cached data
+      window.location.href = '/history';
+    }
+    
+    // Initialize
+    updateCachedCount();
+  </script>
+</body>
+</html>

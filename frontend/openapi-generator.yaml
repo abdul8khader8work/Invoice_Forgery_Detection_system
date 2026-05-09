@@ -1,0 +1,21 @@
+generator:
+  name: openapi-generator-cli
+  version: 6.1.0
+
+output:
+  # Output directory for generated API client
+  directory: lib/core/api/generated
+
+input:
+  # OpenAPI spec location
+  spec: ../backend/openapi.json
+
+options:
+  # Dart generator options
+  generatorName: dart
+  libraryName: invoice_api
+  sourceFolder: lib
+  useEnumExtension: true
+  ensureUniqueParams: true
+  nullableFields: true
+  serializationLibrary: built_value

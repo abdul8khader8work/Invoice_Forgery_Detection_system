@@ -1,0 +1,25 @@
+# Invoice OCR Pipeline - Requirements
+# Core dependencies for the PaddleOCR-based extraction system
+
+# Image Processing - paddleocr requires opencv-python<=4.6.0.66
+opencv-python==4.6.0.66
+numpy==1.24.3
+
+# OCR Engine
+paddlepaddle==2.6.2
+paddleocr==2.7.3
+
+# Web Framework
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6
+
+# Data Validation
+pydantic==2.5.2
+
+# Date Parsing (for validation_service compatibility)
+python-dateutil==2.8.2
+
+# Optional: PDF Support
+# pdf2image==1.16.3
+# Pillow==10.1.0
