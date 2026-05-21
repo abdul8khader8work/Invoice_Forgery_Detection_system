@@ -133,27 +133,27 @@ app.add_middleware(
 # Configure host binding for all interfaces
 @app.on_event("startup")
 async def startup_event():
-    print("🚀 Invoice Forgery Detection API Starting...")
-    print(f"📍 Server will be available at:")
+    print("Invoice Forgery Detection API Starting...")
+    print(f"Server will be available at:")
     print(f"   - http://127.0.0.1:8000")
     print(f"   - http://localhost:8000")
     print(f"   - http://0.0.0.0:8000")
-    print("🔧 CORS enabled for all origins")
-    print("📡 Ready to accept connections from Flutter app")
+    print("CORS enabled for all origins")
+    print("Ready to accept connections from Flutter app")
     
     # Create database tables
     try:
         from app.models.database import create_tables
         create_tables()
-        print("✅ Database tables created/verified")
+        print("Database tables created/verified")
         
         # Create active learning tables
         from app.models.active_learning_models import Base as ALBase
         from app.models.database import engine
         ALBase.metadata.create_all(bind=engine)
-        print("✅ Active Learning tables created/verified")
+        print("Active Learning tables created/verified")
     except Exception as e:
-        print(f"⚠️ Database initialization warning: {e}")
+        print(f"Database initialization warning: {e}")
         print("   Continuing anyway - tables will be created on first save")
 
 # Initialize services
