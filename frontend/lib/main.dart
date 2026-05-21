@@ -5,7 +5,7 @@ import 'core/utils/keyboard_shortcuts.dart';
 import 'core/api/api_client.dart';
 import 'providers/theme_provider.dart';
 import 'providers/auth_provider.dart';
-import 'config.dart';
+import 'core/config/app_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

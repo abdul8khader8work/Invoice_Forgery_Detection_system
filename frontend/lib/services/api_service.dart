@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../models/scan_result.dart';
-import '../config.dart';
+import 'core/config/app_config.dart';
 
 class ApiService {
   // FORCED: Using config file

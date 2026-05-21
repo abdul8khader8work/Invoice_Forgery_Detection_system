@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:dio/dio.dart';
 import 'platform_file_upload_service_io_simple.dart' if (dart.library.io) 'platform_file_upload_service_io_simple.dart';
 import 'platform_file_upload_service_web.dart' if (dart.library.html) 'platform_file_upload_service_web.dart';
-import '../../config.dart';
+import '../config/app_config.dart';
 
 // Upload result class
 class UploadResult {

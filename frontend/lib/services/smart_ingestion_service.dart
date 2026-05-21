@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
-import '../config.dart';
+import 'core/config/app_config.dart';
 
 class SmartIngestionResult {
   final bool success;

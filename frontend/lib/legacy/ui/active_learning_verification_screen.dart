@@ -5,7 +5,7 @@ import 'dart:convert';
 
 import '../models/scan_result.dart';
 import '../services/active_learning_service.dart';
-import '../config.dart';
+import '../../core/config/app_config.dart';
 
 /// Enhanced Verification Screen with Active Learning Support
 /// 

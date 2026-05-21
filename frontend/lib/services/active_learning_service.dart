@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../config.dart';
+import 'core/config/app_config.dart';
 
 class ActiveLearningService {
   static const String _baseUrl = AppConfig.apiBaseUrl;

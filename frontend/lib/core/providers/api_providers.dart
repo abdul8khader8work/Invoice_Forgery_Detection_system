@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:invoice_forgery_detection/core/api/api_client.dart';
-import '../../config.dart';
+import '../config/app_config.dart';
 
 /// Provider for the API client base URL
 final apiBaseUrlProvider = Provider<String>((ref) {
