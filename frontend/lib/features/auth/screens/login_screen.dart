@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:dio/dio.dart';
 import '../../../providers/auth_provider.dart';
 import '../../../widgets/responsive_layout.dart';
+import '../../../core/config/app_config.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -25,6 +27,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     super.dispose();
   }
 
+  Future<bool> _checkBackendHealth() async {
+    try {
+      final dio = Dio();
+      final backendUrl = AppConfig.backendUrl;
+      print('🔗 Checking backend health at: $backendUrl');
+      
+      final response = await dio.get(
+        '$backendUrl/health',
+        options: Options(
+          connectTimeout: const Duration(seconds: 5),
+          receiveTimeout: const Duration(seconds: 5),
+        ),
+      );
+      
+      print('✅ Backend health check passed: ${response.statusCode}');
+      return response.statusCode == 200;
+    } catch (e) {
+      print('❌ Backend health check failed: $e');
+      return false;
+    }
+  }
+
   Future<void> _handleLogin() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -34,6 +58,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     });
 
     try {
+      // Check backend health before attempting login
+      final isBackendHealthy = await _checkBackendHealth();
+      if (!isBackendHealthy) {
+        if (mounted) {
+          setState(() {
+            _errorMessage = 'Backend server is not responding. Please ensure the backend is running at ${AppConfig.backendUrl}';
+            _isLoading = false;
+          });
+        }
+        return;
+      }
+
       await ref.read(authProvider.notifier).login(
         _emailController.text.trim(),
         _passwordController.text,
